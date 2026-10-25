@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAKPHET - Fashion & Lifestyle | LP DESIGN & LP BAKERY</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#1E293B',
+                            900: '#0F172A',
+                            950: '#090D16'
+                        },
+                        brand: {
+                            orange: '#F97316',
+                            hover: '#EA580C',
+                            light: '#FFF7ED'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #F8FAFC;
+        }
+        .logo-gradient {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .hero-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 0.75px, transparent 0.75px), radial-gradient(#cbd5e1 0.75px, #f8fafc 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <!-- TOP HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- LOGO BRANDING -->
+                <button onclick="switchTab('home')" class="flex items-center space-x-3 group text-left">
+                    <div class="relative w-12 h-12 flex items-center justify-center">
+                        <!-- Custom SVG Logo Matching Image Spec -->
+                        <svg viewBox="0 0 100 100" class="w-full h-full transform transition-transform group-hover:scale-105">
+                            <!-- Orange Curved D Arch -->
+                            <path d="M 35 15 C 75 15, 85 40, 85 50 C 85 60, 75 85, 35 85 C 20 85, 15 70, 15 65" fill="none" stroke="#F97316" stroke-width="12" stroke-linecap="round" />
+                            <!-- Dark Blue Slanted Bar -->
+                            <line x1="55" y1="10" x2="25" y2="90" stroke="#0F172A" stroke-width="12" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-xl tracking-wider text-navy-900 leading-none">LAKPHET</div>
+                        <div class="text-[10px] font-medium text-brand-orange tracking-widest uppercase mt-0.5">Fashion & Lifestyle</div>
+                    </div>
+                </button>
+
+                <!-- DESKTOP NAVIGATION LINKS -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 font-medium text-slate-700">
+                    <button id="nav-home" onclick="switchTab('home')" class="px-4 py-2 rounded-full transition-all text-brand-orange bg-brand-light font-semibold">หน้าแรก</button>
+                    <button id="nav-design" onclick="switchTab('design')" class="px-4 py-2 rounded-full hover:text-brand-orange hover:bg-slate-50 transition-all">LP DESIGN</button>
+                    <button id="nav-bakery" onclick="switchTab('bakery')" class="px-4 py-2 rounded-full hover:text-brand-orange hover:bg-slate-50 transition-all">LP BAKERY</button>
+                    <button onclick="scrollToFooter()" class="px-4 py-2 rounded-full hover:text-brand-orange hover:bg-slate-50 transition-all">เกี่ยวกับเรา</button>
+                    <button onclick="scrollToFooter()" class="px-4 py-2 rounded-full hover:text-brand-orange hover:bg-slate-50 transition-all">ติดต่อเรา</button>
+                </nav>
+
+                <!-- RIGHT HEADER ACTIONS -->
+                <div class="hidden sm:flex items-center space-x-3">
+                    <div class="relative">
+                        <input type="text" placeholder="ค้นหา..." class="w-36 lg:w-48 text-sm bg-slate-100 border border-slate-200 rounded-full pl-9 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-orange/50 transition">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
+                    </div>
+                    <button onclick="switchTab('bakery'); setTimeout(() => document.getElementById('order-section').scrollIntoView({behavior: 'smooth'}), 100);" class="bg-brand-orange hover:bg-brand-hover text-white text-sm font-medium px-5 py-2.5 rounded-full shadow-md shadow-brand-orange/20 transition hover:shadow-lg transform active:scale-95">
+                        <i class="fa-solid fa-cart-shopping mr-1.5"></i> สั่งซื้อเลย
+                    </button>
+                </div>
+
+                <!-- MOBILE MENU BUTTON -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button onclick="toggleMobileMenu()" class="p-2 text-slate-700 hover:text-brand-orange rounded-lg focus:outline-none">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE DROPDOWN MENU -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium hover:bg-brand-light hover:text-brand-orange">หน้าแรก</button>
+            <button onclick="switchTab('design'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium hover:bg-brand-light hover:text-brand-orange">LP DESIGN (งานปัก/สกรีน)</button>
+            <button onclick="switchTab('bakery'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium hover:bg-brand-light hover:text-brand-orange">LP BAKERY (ขนม/เบเกอรี่)</button>
+            <button onclick="scrollToFooter(); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-xl font-medium hover:bg-brand-light hover:text-brand-orange">เกี่ยวกับเรา & ติดต่อเรา</button>
+            <div class="pt-2">
+                <button onclick="switchTab('bakery'); toggleMobileMenu(); setTimeout(() => document.getElementById('order-section').scrollIntoView({behavior: 'smooth'}), 100);" class="w-full bg-brand-orange text-white py-3 rounded-xl font-medium text-center shadow-md">
+                    สั่งซื้อสินค้าออนไลน์
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: WELCOME / LANDING PAGE ================= -->
+        <section id="page-home" class="block transition-opacity duration-300">
+            <!-- HERO BANNER -->
+            <div class="relative bg-gradient-to-br from-slate-900 via-navy-800 to-slate-900 text-white overflow-hidden py-16 lg:py-24">
+                <div class="absolute inset-0 opacity-20 hero-pattern"></div>
+                <!-- Decorative Glow Circles -->
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-orange/30 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
+
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur border border-white/20 px-4 py-1.5 rounded-full text-brand-orange text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+                        <span>Two Businesses. One Brand.</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight max-w-4xl mx-auto">
+                        ยินดีต้อนรับสู่เว็บโฮมหลักทางการ <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-400">LAKPHET</span>
+                    </h1>
+                    <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-light">
+                        ครบจบในที่เดียว ทั้งงานออกแบบเสื้อผ้า งานปัก งานสกรีน และเบเกอรี่พรีเมียมพร้อมออเดอร์
+                    </p>
+                </div>
+            </div>
+
+            <!-- CHOOSE YOUR BUSINESS SECTION (2 DUAL CARDS) -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-10 mb-20">
+                <div class="text-center mb-8 bg-white/80 backdrop-blur py-3 px-6 rounded-2xl shadow-sm border border-slate-100 max-w-md mx-auto">
+                    <h2 class="text-xl font-bold text-navy-900">เลือกเข้าสู่ธุรกิจของเรา</h2>
+                    <p class="text-xs text-slate-500 uppercase tracking-widest">Choose Your Business</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- CARD 1: LP DESIGN -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col justify-between transform hover:-translate-y-1">
+                        <div class="relative h-64 overflow-hidden bg-slate-900">
+                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt="LP DESIGN Shirts" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-white">
+                                <span class="bg-brand-orange text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Fashion & Custom</span>
+                                <h3 class="text-3xl font-bold mt-2">LP DESIGN</h3>
+                                <p class="text-slate-300 text-sm mt-1">งานปัก • งานสกรีน • งานสติ๊กเกอร์</p>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-white flex-grow flex flex-col justify-between">
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                บริการรับปักผ้า สกรีนเสื้อ และทำสติ๊กเกอร์ไดคัท คุณภาพสูง คมชัด ทนทาน รองรับทั้งงานชิ้นเดียวและงานจำนวนมากสำหรับองค์กร
+                            </p>
+                            <button onclick="switchTab('design')" class="w-full bg-navy-900 hover:bg-brand-orange text-white font-semibold py-3.5 px-6 rounded-2xl flex items-center justify-center space-x-2 transition duration-300 group-hover:shadow-lg group-hover:shadow-brand-orange/20">
+                                <span>เข้าสู่เว็บไซต์</span>
+                                <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-1 transition"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: LP BAKERY -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col justify-between transform hover:-translate-y-1">
+                        <div class="relative h-64 overflow-hidden bg-amber-950">
+                            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" alt="LP BAKERY Pastry" class="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-amber-950 via-amber-950/40 to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-white">
+                                <span class="bg-amber-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Bakery & Desserts</span>
+                                <h3 class="text-3xl font-bold mt-2">LP BAKERY</h3>
+                                <p class="text-amber-200 text-sm mt-1">กะหรี่ปั๊บ • บราวนี่ • ขนมไทย</p>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-white flex-grow flex flex-col justify-between">
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                ความอร่อยที่ทำการออเดอร์ ขนมอบสดใหม่ กะหรี่ปั๊บกรอบนอกนุ่มใน บราวนี่เข้มข้น และขนมไทยรสชาติกลมกล่อมพิถีพิถัน
+                            </p>
+                            <button onclick="switchTab('bakery')" class="w-full bg-brand-orange hover:bg-brand-hover text-white font-semibold py-3.5 px-6 rounded-2xl flex items-center justify-center space-x-2 transition duration-300 shadow-md shadow-brand-orange/20">
+                                <span>เข้าสู่เว็บไซต์</span>
+                                <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-1 transition"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE SELLING POINTS / FEATURES -->
+            <div class="bg-white py-16 border-t border-b border-slate-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-orange/30 transition">
+                            <div class="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mx-auto text-brand-orange text-2xl mb-4 shadow-sm">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-base">คุณภาพพรีเมียม</h4>
+                            <p class="text-xs text-slate-500 mt-1">คัดสรรวัตถุดิบและวัสดุชั้นดี</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-orange/30 transition">
+                            <div class="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mx-auto text-brand-orange text-2xl mb-4 shadow-sm">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-base">บริการรวดเร็ว</h4>
+                            <p class="text-xs text-slate-500 mt-1">จัดส่งตรงเวลา ได้มาตรฐาน</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-orange/30 transition">
+                            <div class="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mx-auto text-brand-orange text-2xl mb-4 shadow-sm">
+                                <i class="fa-solid fa-tags"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-base">ราคายุติธรรม</h4>
+                            <p class="text-xs text-slate-500 mt-1">คุ้มค่าสมราคา มิตรภาพ</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-orange/30 transition">
+                            <div class="w-14 h-14 bg-brand-light rounded-2xl flex items-center justify-center mx-auto text-brand-orange text-2xl mb-4 shadow-sm">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-base">ดูแลลูกค้าทุกขั้นตอน</h4>
+                            <p class="text-xs text-slate-500 mt-1">ใส่ใจรายละเอียดทุกออเดอร์</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 2: LP DESIGN ================= -->
+        <section id="page-design" class="hidden transition-opacity duration-300">
+            <!-- LP DESIGN HERO -->
+            <div class="bg-navy-900 text-white py-16 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between">
+                    <div class="mb-8 md:mb-0 max-w-xl">
+                        <span class="inline-block bg-brand-orange text-white text-xs font-semibold px-3 py-1 rounded-full mb-3">LP DESIGN</span>
+                        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">งานปัก งานสกรีน งานสติ๊กเกอร์</h1>
+                        <p class="text-slate-300 mt-3 text-sm sm:text-base leading-relaxed">
+                            สร้างสรรค์ผลงานในแบบของคุณด้วยเครื่องจักรทันสมัย ลายปักคมชัด สีสกรีนสดใส สติ๊กเกอร์เกรดพรีเมียมทนแดดทนฝน
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <a href="#design-services" class="bg-brand-orange hover:bg-brand-hover text-white text-sm font-semibold px-6 py-3 rounded-xl shadow-lg transition">ดูบริการทั้งหมด →</a>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-80 h-52 bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col items-center justify-center text-center backdrop-blur">
+                        <div class="w-16 h-16 rounded-full bg-brand-orange/20 text-brand-orange flex items-center justify-center text-3xl mb-3">
+                            <i class="fa-solid fa-shirt"></i>
+                        </div>
+                        <p class="font-bold text-lg">ปรึกษาและประเมินราคาฟรี</p>
+                        <p class="text-xs text-slate-400 mt-1">ส่งแบบลายของคุณให้เราประเมินได้ทันที</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICES HIGHLIGHT ICONS -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center space-x-4">
+                        <div class="w-14 h-14 bg-orange-100 text-brand-orange rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+                            <i class="fa-solid fa-scissors"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">งานปัก (Embroidery)</h3>
+                            <p class="text-xs text-slate-500 mt-1">คมชัด ทนทาน ไม่หลุดลุ่ย ด้วยจักรคอมพิวเตอร์</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center space-x-4">
+                        <div class="w-14 h-14 bg-orange-100 text-brand-orange rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">งานสกรีน (Screen Print)</h3>
+                            <p class="text-xs text-slate-500 mt-1">สีสวย คมชัด ติดแน่น ไม่หลุดลอกง่าย</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center space-x-4">
+                        <div class="w-14 h-14 bg-orange-100 text-brand-orange rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
+                            <i class="fa-solid fa-note-sticky"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800">งานสติ๊กเกอร์ (Stickers)</h3>
+                            <p class="text-xs text-slate-500 mt-1">คุณภาพสูง ไดคัทตามทรง กันน้ำ 100%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PORTFOLIO SHOWCASE GALLERY GRID -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-slate-200 pb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">ผลงานของเรา</h2>
+                        <p class="text-sm text-slate-500">ตัวอย่างผลงานปัก สกรีน และสติ๊กเกอร์ที่คุณไว้วางใจ</p>
+                    </div>
+                    <!-- Gallery Filter -->
+                    <div class="flex space-x-2 mt-4 sm:mt-0 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+                        <button onclick="filterPortfolio('all')" class="portfolio-btn active px-4 py-1.5 rounded-full text-xs font-semibold bg-brand-orange text-white">ทั้งหมด</button>
+                        <button onclick="filterPortfolio('embroidery')" class="portfolio-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">งานปัก</button>
+                        <button onclick="filterPortfolio('screen')" class="portfolio-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">งานสกรีน</button>
+                        <button onclick="filterPortfolio('sticker')" class="portfolio-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">งานสติ๊กเกอร์</button>
+                    </div>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="portfolio-grid">
+                    <!-- Item 1 -->
+                    <div class="portfolio-item embroidery group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=800&q=80', 'เสื้อยืดปักโลโก้หน้าอก')">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+                                <i class="fa-solid fa-magnifying-glass-plus text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-medium">งานปัก</span>
+                            <h4 class="text-sm font-semibold text-slate-800 mt-1">เสื้อยืดปักโลโก้หน้าอก</h4>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="portfolio-item screen group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80', 'เสื้อสกรีนลายกราฟิก')">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+                                <i class="fa-solid fa-magnifying-glass-plus text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">งานสกรีน</span>
+                            <h4 class="text-sm font-semibold text-slate-800 mt-1">เสื้อโปโลสกรีนลายกราฟิก</h4>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="portfolio-item sticker group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1572375992501-4b0892d50c69?auto=format&fit=crop&w=800&q=80', 'สติ๊กเกอร์โลโก้สินค้าไดคัท')">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1572375992501-4b0892d50c69?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+                                <i class="fa-solid fa-magnifying-glass-plus text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-medium">งานสติ๊กเกอร์</span>
+                            <h4 class="text-sm font-semibold text-slate-800 mt-1">สติ๊กเกอร์โลโก้สินค้าไดคัท</h4>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="portfolio-item embroidery group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=80', 'หมวกแก๊ปปักตราสัญลักษณ์')">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+                                <i class="fa-solid fa-magnifying-glass-plus text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-medium">งานปัก</span>
+                            <h4 class="text-sm font-semibold text-slate-800 mt-1">หมวกแก๊ปปักตราสัญลักษณ์</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETAILED SERVICES LIST SECTION -->
+            <div id="design-services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6">บริการของเรา</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-shirt"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-800">งานปัก</h3>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                                บริการปักเสื้อ โปโล หมวก กระเป๋า และผ้าทุกชนิดด้วยระบบคอมพิวเตอร์ที่แม่นยำ ฝีเข็มถี่แน่น สีไม่ตก
+                            </p>
+                        </div>
+                        <button onclick="scrollToFooter()" class="mt-6 w-full bg-brand-orange hover:bg-brand-hover text-white py-2.5 rounded-xl text-sm font-semibold transition">
+                            ดูรายละเอียด →
+                        </button>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-print"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-800">งานสกรีน</h3>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                                รับสกรีนเสื้อกลุ่ม เสื้อทีม เสื้อโฆษณา ด้วยเทคนิคการสกรีนยาง สีจม และ DTF งานคมชัดทุกรายละเอียด
+                            </p>
+                        </div>
+                        <button onclick="scrollToFooter()" class="mt-6 w-full bg-brand-orange hover:bg-brand-hover text-white py-2.5 rounded-xl text-sm font-semibold transition">
+                            ดูรายละเอียด →
+                        </button>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center text-xl mb-4">
+                                <i class="fa-solid fa-copy"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-800">งานสติ๊กเกอร์</h3>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                                พิมพ์สติ๊กเกอร์ฉลากสินค้า สติ๊กเกอร์ติดรถยนต์ ไดคัทตามรูปแบบ ทนแดด ทนฝน ไม่หลุดร่อนง่าย
+                            </p>
+                        </div>
+                        <button onclick="scrollToFooter()" class="mt-6 w-full bg-brand-orange hover:bg-brand-hover text-white py-2.5 rounded-xl text-sm font-semibold transition">
+                            ดูรายละเอียด →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CALL TO ACTION BANNER -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12">
+                <div class="bg-gradient-to-r from-navy-900 to-slate-800 rounded-3xl p-8 sm:p-12 text-white text-center relative overflow-hidden shadow-xl">
+                    <h3 class="text-2xl sm:text-3xl font-bold">พร้อมให้บริการทุกความต้องการ</h3>
+                    <p class="text-slate-300 text-sm mt-2 max-w-xl mx-auto">ติดต่อสอบถามเพื่อขอใบเสนอราคา หรือสอบถามรายละเอียดเพิ่มเติมกับทีมงาน LP DESIGN</p>
+                    <button onclick="scrollToFooter()" class="mt-6 bg-brand-orange hover:bg-brand-hover text-white font-semibold px-8 py-3 rounded-full shadow-lg transition">
+                        ติดต่อเรา →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 3: LP BAKERY ================= -->
+        <section id="page-bakery" class="hidden transition-opacity duration-300">
+            <!-- LP BAKERY HERO BANNER -->
+            <div class="bg-amber-950 text-white py-16 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <span class="bg-amber-600 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase">LP BAKERY</span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold mt-3 tracking-tight">กะหรี่ปั๊บ • บราวนี่ • ขนมไทย</h1>
+                    <p class="text-amber-200 mt-2 text-sm sm:text-base max-w-xl">
+                        ความอร่อยที่ทำการออเดอร์ สดใหม่จากเตาทุกวัน ปราศจากสารกันบวม วัตถุดิบเกรดพรีเมียม
+                    </p>
+                    <div class="mt-6">
+                        <a href="#order-section" class="bg-brand-orange hover:bg-brand-hover text-white font-semibold px-6 py-3 rounded-xl shadow-lg inline-block transition">
+                            ดูเมนู/สั่งซื้อออเดอร์ →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECOMMENDED MENU SECTION -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">เมนูแนะนำ</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">คัดสรรความอร่อยพร้อมเสิร์ฟถึงบ้านคุณ</p>
+                    </div>
+                    <!-- Menu Filter Tabs -->
+                    <div class="flex space-x-2 mt-4 sm:mt-0 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+                        <button onclick="filterBakery('all')" class="bakery-tab active px-4 py-1.5 rounded-full text-xs font-semibold bg-brand-orange text-white">ทั้งหมด</button>
+                        <button onclick="filterBakery('currypuff')" class="bakery-tab px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">กะหรี่ปั๊บ</button>
+                        <button onclick="filterBakery('brownie')" class="bakery-tab px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">บราวนี่</button>
+                        <button onclick="filterBakery('thaidessert')" class="bakery-tab px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">ขนมไทย</button>
+                    </div>
+                </div>
+
+                <!-- MENU CARDS GRID -->
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="bakery-grid">
+                    <!-- Item 1 -->
+                    <div class="bakery-item currypuff bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 flex flex-col justify-between">
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80" alt="กะหรี่ปั๊บไก่" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">กะหรี่ปั๊บไก่</h3>
+                                <p class="text-xs text-slate-500 mt-1">ไส้ไก่เข้มข้น แป้งบางกรอบสูตรเฉพาะ</p>
+                            </div>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-brand-orange font-bold text-sm">ชิ้นละ 25.-</span>
+                                <button onclick="selectProduct('กะหรี่ปั๊บไก่', 25)" class="bg-brand-light text-brand-orange hover:bg-brand-orange hover:text-white p-2 rounded-xl text-xs font-semibold transition">
+                                    <i class="fa-solid fa-plus mr-1"></i> เลือก
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bakery-item brownie bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 flex flex-col justify-between">
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80" alt="บราวนี่ช็อคโกแลต" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">บราวนี่ช็อคโกแลต</h3>
+                                <p class="text-xs text-slate-500 mt-1">เนื้อหนึบ ช็อคโกแลตแท้นำเข้า</p>
+                            </div>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-brand-orange font-bold text-sm">ชิ้นละ 35.-</span>
+                                <button onclick="selectProduct('บราวนี่ช็อคโกแลต', 35)" class="bg-brand-light text-brand-orange hover:bg-brand-orange hover:text-white p-2 rounded-xl text-xs font-semibold transition">
+                                    <i class="fa-solid fa-plus mr-1"></i> เลือก
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bakery-item thaidessert bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 flex flex-col justify-between">
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80" alt="ขนมชั้นใบเตย" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">ขนมชั้นใบเตย</h3>
+                                <p class="text-xs text-slate-500 mt-1">หอมใบเตยแท้ เหนียวนุ่ม หวานกำลังดี</p>
+                            </div>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-brand-orange font-bold text-sm">ชิ้นละ 20.-</span>
+                                <button onclick="selectProduct('ขนมชั้นใบเตย', 20)" class="bg-brand-light text-brand-orange hover:bg-brand-orange hover:text-white p-2 rounded-xl text-xs font-semibold transition">
+                                    <i class="fa-solid fa-plus mr-1"></i> เลือก
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="bakery-item thaidessert bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 flex flex-col justify-between">
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=600&q=80" alt="ทองหยอด" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">ทองหยอด</h3>
+                                <p class="text-xs text-slate-500 mt-1">กลมกล่อม หวานละมุน ทำสดใหม่</p>
+                            </div>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-brand-orange font-bold text-sm">ชิ้นละ 25.-</span>
+                                <button onclick="selectProduct('ทองหยอด', 25)" class="bg-brand-light text-brand-orange hover:bg-brand-orange hover:text-white p-2 rounded-xl text-xs font-semibold transition">
+                                    <i class="fa-solid fa-plus mr-1"></i> เลือก
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE ORDER FORM SECTION -->
+            <div id="order-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="bg-white rounded-3xl shadow-lg border border-slate-100 p-6 sm:p-10">
+                    <div class="border-b border-slate-100 pb-4 mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900">สั่งซื้อออเดอร์</h2>
+                        <p class="text-xs text-slate-500">กรอกข้อมูลเพื่อทำรายการสั่งซื้อเบเกอรี่สดใหม่</p>
+                    </div>
+
+                    <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- LEFT COLUMN: PRODUCT SELECTION & QUANTITY -->
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">เลือกเมนู *</label>
+                                <select id="orderMenu" onchange="updatePriceCalculation()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                                    <option value="กะหรี่ปั๊บไก่" data-price="25">กะหรี่ปั๊บไก่ (25.-)</option>
+                                    <option value="บราวนี่ช็อคโกแลต" data-price="35">บราวนี่ช็อคโกแลต (35.-)</option>
+                                    <option value="ขนมชั้นใบเตย" data-price="20">ขนมชั้นใบเตย (20.-)</option>
+                                    <option value="ทองหยอด" data-price="25">ทองหยอด (25.-)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">จำนวน *</label>
+                                <div class="flex items-center space-x-3">
+                                    <button type="button" onclick="adjustQty(-1)" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 transition">-</button>
+                                    <input type="number" id="orderQty" value="1" min="1" onchange="updatePriceCalculation()" class="w-20 text-center bg-slate-50 border border-slate-200 rounded-xl py-2 font-bold text-slate-800">
+                                    <button type="button" onclick="adjustQty(1)" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 transition">+</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">วันที่ต้องการรับสินค้า *</label>
+                                <input type="date" id="orderDate" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                            </div>
+
+                            <div class="pt-2">
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">ช่องทางการชำระเงิน</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center space-x-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                        <input type="radio" name="payment" value="โอนเงินผ่านธนาคาร" checked class="text-brand-orange focus:ring-brand-orange">
+                                        <span class="text-sm font-medium text-slate-700"><i class="fa-solid fa-building-columns text-slate-400 mr-2"></i>โอนเงินผ่านธนาคาร</span>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50">
+                                        <input type="radio" name="payment" value="PromptPay" class="text-brand-orange focus:ring-brand-orange">
+                                        <span class="text-sm font-medium text-slate-700"><i class="fa-solid fa-qrcode text-slate-400 mr-2"></i>PromptPay</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT COLUMN: CUSTOMER DETAILS & SUMMARY -->
+                        <div class="space-y-5 flex flex-col justify-between">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">ชื่อ-นามสกุล *</label>
+                                    <input type="text" id="custName" required placeholder="ระบุชื่อและนามสกุล" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">เบอร์โทรศัพท์ *</label>
+                                    <input type="tel" id="custPhone" required placeholder="08X-XXX-XXXX" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">ที่อยู่จัดส่ง *</label>
+                                    <textarea id="custAddress" required rows="3" placeholder="บ้านเลขที่, ถนน, แขวง/ตำบล, เขต/อำเภอ, จังหวัด" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- PRICE SUMMARY BOX -->
+                            <div class="bg-brand-light p-4 rounded-2xl border border-orange-100">
+                                <div class="flex justify-between items-center text-sm text-slate-600 mb-1">
+                                    <span>ราคาสินค้า:</span>
+                                    <span id="summarySubtotal" class="font-semibold">25.-</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm text-slate-600 mb-2">
+                                    <span>ค่าจัดส่ง:</span>
+                                    <span class="font-semibold text-emerald-600">30.-</span>
+                                </div>
+                                <div class="border-t border-orange-200 pt-2 flex justify-between items-center">
+                                    <span class="font-bold text-slate-800">ยอดรวมทั้งหมด:</span>
+                                    <span id="summaryTotal" class="font-extrabold text-brand-orange text-xl">55.-</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-orange hover:bg-brand-hover text-white font-bold py-3.5 rounded-xl shadow-lg shadow-brand-orange/30 transition transform active:scale-98">
+                                ยืนยันการสั่งซื้อ
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER SECTION -->
+    <footer id="footer" class="bg-navy-900 text-slate-300 pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800">
+                <!-- BRAND INFO -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-brand-orange/20 rounded-xl flex items-center justify-center text-brand-orange">
+                            <i class="fa-solid fa-layer-group text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-lg text-white block leading-none">LAKPHET</span>
+                            <span class="text-[10px] text-brand-orange uppercase tracking-wider">Fashion & Lifestyle</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+                        ศูนย์รวมบริการงานปัก งานสกรีน สติ๊กเกอร์คุณภาพสูง และบริการเบเกอรี่แสนอร่อย ปรุงสดใหม่สำหรับทุกโอกาสสำคัญของคุณ
+                    </p>
+                </div>
+
+                <!-- QUICK NAVIGATION LINKS -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">เมนูด่วน</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><button onclick="switchTab('home')" class="hover:text-brand-orange transition">หน้าแรก</button></li>
+                        <li><button onclick="switchTab('design')" class="hover:text-brand-orange transition">LP DESIGN (งานปัก/สกรีน)</button></li>
+                        <li><button onclick="switchTab('bakery')" class="hover:text-brand-orange transition">LP BAKERY (ขนม/เบเกอรี่)</button></li>
+                        <li><button onclick="scrollToFooter()" class="hover:text-brand-orange transition">เกี่ยวกับเรา</button></li>
+                    </ul>
+                </div>
+
+                <!-- CONTACT & SOCIAL INFO -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">ติดต่อเรา</h4>
+                    <div class="space-y-2 text-xs text-slate-400">
+                        <p class="flex items-center"><i class="fa-solid fa-phone text-brand-orange w-5"></i> 08X-XXX-XXXX</p>
+                        <p class="flex items-center"><i class="fa-solid fa-comment-dots text-brand-orange w-5"></i> Line Official: @lakphetbakery</p>
+                        <div class="pt-3 flex space-x-3 text-lg">
+                            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-brand-orange text-white flex items-center justify-center transition"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-brand-orange text-white flex items-center justify-center transition"><i class="fa-brands fa-instagram text-xs"></i></a>
+                            <a href="#" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-brand-orange text-white flex items-center justify-center transition"><i class="fa-brands fa-line text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6 text-center text-xs text-slate-500">
+                <p>© 2025 LAKPHET. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- MODAL: ORDER CONFIRMATION -->
+    <div id="orderModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 text-center shadow-2xl transform transition-all scale-95 opacity-0" id="orderModalCard">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">ส่งคำสั่งซื้อสำเร็จ!</h3>
+            <p class="text-xs text-slate-500 mt-1">ขอบคุณที่ไว้วางใจ LAKPHET BAKERY เราได้รับออเดอร์ของคุณเรียบร้อยแล้ว</p>
+            
+            <div id="modalOrderSummary" class="bg-slate-50 p-4 rounded-2xl text-left text-xs text-slate-600 my-4 space-y-1.5 border border-slate-100">
+                <!-- Injected via JS -->
+            </div>
+
+            <button onclick="closeModal()" class="w-full bg-slate-900 hover:bg-brand-orange text-white font-semibold py-3 rounded-xl transition">
+                ตกลง
+            </button>
+        </div>
+    </div>
+
+
+    <!-- MODAL: IMAGE ZOOM FOR GALLERY -->
+    <div id="imageModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" onclick="closeImageModal()">
+        <div class="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+            <button onclick="closeImageModal()" class="absolute top-3 right-3 w-8 h-8 bg-black/50 hover:bg-black text-white rounded-full flex items-center justify-center text-sm z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="modalImg" src="" class="w-full h-80 object-cover">
+            <div class="p-4 bg-white">
+                <h4 id="modalCaption" class="font-bold text-slate-800 text-base"></h4>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT INTERACTION LOGIC -->
+    <script>
+        // Set Default Order Date to Tomorrow
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('orderDate');
+            if(dateInput) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                dateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+            updatePriceCalculation();
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            const pages = ['home', 'design', 'bakery'];
+            pages.forEach(p => {
+                const el = document.getElementById(`page-${p}`);
+                const nav = document.getElementById(`nav-${p}`);
+                if (p === tabName) {
+                    el.classList.remove('hidden');
+                    if(nav) {
+                        nav.classList.add('text-brand-orange', 'bg-brand-light', 'font-semibold');
+                        nav.classList.remove('text-slate-700');
+                    }
+                } else {
+                    el.classList.add('hidden');
+                    if(nav) {
+                        nav.classList.remove('text-brand-orange', 'bg-brand-light', 'font-semibold');
+                        nav.classList.add('text-slate-700');
+                    }
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            if(menu.classList.contains('hidden')) {
+                icon.className = "fa-solid fa-bars text-2xl";
+            } else {
+                icon.className = "fa-solid fa-xmark text-2xl";
+            }
+        }
+
+        // Portfolio Filter Logic
+        function filterPortfolio(category) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const btns = document.querySelectorAll('.portfolio-btn');
+            
+            btns.forEach(btn => {
+                btn.classList.remove('bg-brand-orange', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            event.target.classList.remove('bg-slate-100', 'text-slate-600');
+            event.target.classList.add('bg-brand-orange', 'text-white');
+
+            items.forEach(item => {
+                if(category === 'all' || item.classList.contains(category)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Bakery Filter Logic
+        function filterBakery(category) {
+            const items = document.querySelectorAll('.bakery-item');
+            const tabs = document.querySelectorAll('.bakery-tab');
+            
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-brand-orange', 'text-white');
+                tab.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            event.target.classList.remove('bg-slate-100', 'text-slate-600');
+            event.target.classList.add('bg-brand-orange', 'text-white');
+
+            items.forEach(item => {
+                if(category === 'all' || item.classList.contains(category)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Select Product from Bakery Grid
+        function selectProduct(name, price) {
+            const menuSelect = document.getElementById('orderMenu');
+            for(let option of menuSelect.options) {
+                if(option.value === name) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            updatePriceCalculation();
+            document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Adjust Quantity
+        function adjustQty(delta) {
+            const qtyInput = document.getElementById('orderQty');
+            let current = parseInt(qtyInput.value) || 1;
+            current += delta;
+            if(current < 1) current = 1;
+            qtyInput.value = current;
+            updatePriceCalculation();
+        }
+
+        // Update Price Calculation
+        function updatePriceCalculation() {
+            const menuSelect = document.getElementById('orderMenu');
+            const qty = parseInt(document.getElementById('orderQty').value) || 1;
+            const selectedOption = menuSelect.options[menuSelect.selectedIndex];
+            const price = parseInt(selectedOption.getAttribute('data-price')) || 0;
+
+            const subtotal = price * qty;
+            const shipping = 30;
+            const total = subtotal + shipping;
+
+            document.getElementById('summarySubtotal').textContent = `${subtotal}.-`;
+            document.getElementById('summaryTotal').textContent = `${total}.-`;
+        }
+
+        // Submit Order Modal
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const menu = document.getElementById('orderMenu').value;
+            const qty = document.getElementById('orderQty').value;
+            const total = document.getElementById('summaryTotal').textContent;
+
+            const modalSummary = document.getElementById('modalOrderSummary');
+            modalSummary.innerHTML = `
+                <p><strong>ผู้สั่งซื้อ:</strong> ${name} (${phone})</p>
+                <p><strong>รายการ:</strong> ${menu} x ${qty} ชิ้น</p>
+                <p><strong>ยอดชำระรวม:</strong> <span class="text-brand-orange font-bold">${total}</span></p>
+            `;
+
+            const modal = document.getElementById('orderModal');
+            const modalCard = document.getElementById('orderModalCard');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalCard.classList.remove('scale-95', 'opacity-0');
+                modalCard.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('orderModal');
+            const modalCard = document.getElementById('orderModalCard');
+            modalCard.classList.remove('scale-100', 'opacity-100');
+            modalCard.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        // Image Zoom Modal
+        function openImageModal(imgSrc, caption) {
+            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('modalCaption').textContent = caption;
+            document.getElementById('imageModal').classList.remove('hidden');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+        }
+
+        function scrollToFooter() {
+            document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
